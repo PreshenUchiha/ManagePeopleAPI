@@ -17,15 +17,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Domains\Entities\Accounts\Controllers\" />
-    <Folder Include="Domains\Entities\Accounts\Repositories\" />
-    <Folder Include="Domains\Entities\Persons\Controllers\" />
-    <Folder Include="Domains\Entities\Persons\Repositories\" />
-    <Folder Include="Domains\Entities\Transactions\Controllers\" />
-    <Folder Include="Domains\Entities\Transactions\Repositories\" />
-    <Folder Include="NewFolder - Copy %285%29\" />
-    <Folder Include="Data\" />
-  </ItemGroup>
-
 </Project>
