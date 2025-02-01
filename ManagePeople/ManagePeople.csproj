@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="9.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="9.0.0" />
+    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+    <PackageReference Include="Serilog.Enrichers.Span" Version="3.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Domains\Entities\Accounts\Controllers\" />
+    <Folder Include="Domains\Entities\Accounts\Repositories\" />
+    <Folder Include="Domains\Entities\Persons\Controllers\" />
+    <Folder Include="Domains\Entities\Persons\Repositories\" />
+    <Folder Include="Domains\Entities\Transactions\Controllers\" />
+    <Folder Include="Domains\Entities\Transactions\Repositories\" />
+    <Folder Include="NewFolder - Copy %285%29\" />
+    <Folder Include="Data\" />
+  </ItemGroup>
+
+</Project>
