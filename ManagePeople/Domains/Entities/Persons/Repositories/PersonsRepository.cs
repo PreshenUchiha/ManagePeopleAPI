@@ -172,7 +172,7 @@ namespace ManagePeople.Domains.Entities.Persons.Repositories
                         code,
                         person.Name,
                         person.Surname,
-                        person.IdNumber
+                        Id_Number = person.IdNumber
                     },
                     commandType: CommandType.StoredProcedure);
 

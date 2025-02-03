@@ -1,6 +1,7 @@
 ﻿using ManagePeople.Domains.Entities.Persons.Repositories;
 using ManagePeople.Libraries.Shared;
 using Microsoft.AspNetCore.Mvc;
+using System.Drawing;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace ManagePeople.Domains.Entities.Persons.Controllers
@@ -89,5 +90,43 @@ namespace ManagePeople.Domains.Entities.Persons.Controllers
 
             return deleteSucceeded ? NoContent() : BadRequest();
         }
+
+        [HttpPut("{code:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType<ProblemDetails>(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> UpdateAsync(int code, PersonModel person)
+        {
+            logger.LogInformation(
+                "Controller => Attempting to update person {Person}",
+                code);
+
+            if (person.Code != code)
+            {
+                logger.LogWarning(
+                    "{Announcement}: Someone attempted to modify another person's definition",
+                    "WARNING");
+
+                return StatusCode(StatusCodes.Status403Forbidden);
+            }
+
+            var existingTeam = await personsRepository.RetrieveSingleAsync(code);
+
+            if (existingTeam is null)
+            {
+                logger.LogWarning(
+                    "{Announcement}: Person {Person} was not found",
+                    "WARNING", code);
+
+                return NotFound();
+            }
+
+            var updateSucceeded = await personsRepository.UpdateAsync(code, person);
+
+
+            return updateSucceeded ? NoContent() : BadRequest();
+        }
+
     }
 }
