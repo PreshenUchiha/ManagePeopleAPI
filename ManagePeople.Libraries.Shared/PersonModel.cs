@@ -1,13 +1,20 @@
-﻿namespace ManagePeople.Libraries.Shared
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ManagePeople.Libraries.Shared
 {
     public class PersonModel
     {
         public int Code { get; set; }
+
+        [Required]
         public string? Name { get; set; }
+
+        [Required]
         public string? Surname { get; set; }
+
+        [Required]
         public string IdNumber { get; set; } = string.Empty;
 
-        // Navigation property: A person can have multiple accounts
-        public List<AccountModel> Accounts { get; set; } = new();
+        public List<AccountModel>? Accounts { get; set; } = new();
     }
 }

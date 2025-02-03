@@ -4,11 +4,11 @@ namespace ManagePeople.Domains.Entities.Accounts
 {
     public static class DependencyInjection
     {
-        //public static  IServiceCollection AddAccountServices(this IServiceCollection services)
-        //{
-        //    services.AddScoped<IAccountsRepository, AccountsRepository>();
+        public static IServiceCollection AddAccountServices(this IServiceCollection services)
+        {
+            services.AddScoped<IAccountsRepository, AccountsRepository>();
 
-        //    return services;
-        //}
+            return services;
+        }
     }
 }
