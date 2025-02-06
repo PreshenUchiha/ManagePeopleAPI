@@ -9,6 +9,7 @@
         public string DeletePersonById { get; set; } = string.Empty; 
 
         public string GetAllAccounts { get; set; } = string.Empty;
+        public string GetAllAccountsByPersonId { get; set; } = string.Empty;
         public string GetAccountById { get; set; } = string.Empty;
         public string InsertNewAccount { get; set; } = string.Empty;
         public string UpdateAccountById { get; set; } = string.Empty;

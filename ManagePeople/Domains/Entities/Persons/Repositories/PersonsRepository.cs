@@ -22,10 +22,10 @@ namespace ManagePeople.Domains.Entities.Persons.Repositories
 
             var dynamicParams = new DynamicParameters();
 
-            dynamicParams.Add(name: "@Code", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            dynamicParams.Add(name: "@PersonId", dbType: DbType.Int32, direction: ParameterDirection.Output);
             dynamicParams.Add(name: "@Name", value: person.Name, dbType: DbType.String, direction: ParameterDirection.Input);
             dynamicParams.Add(name: "@Surname", value: person.Surname, dbType: DbType.String, direction: ParameterDirection.Input);
-            dynamicParams.Add(name: "@Id_Number", value: person.IdNumber, dbType: DbType.String, direction: ParameterDirection.Input);
+            dynamicParams.Add(name: "@IdNumber", value: person.IdNumber, dbType: DbType.String, direction: ParameterDirection.Input);
 
             using var sqlConnection = new SqlConnection(connectionStrings.Value.ManagePeopleDb);
 
@@ -36,11 +36,11 @@ namespace ManagePeople.Domains.Entities.Persons.Repositories
                     param: dynamicParams,
                     commandType: CommandType.StoredProcedure);
 
-                person.Code = dynamicParams.Get<int>("@Code");
+                person.PersonId = dynamicParams.Get<int>("@PersonId");
 
                 logger.LogInformation(
                     "{Announcement}: Attempt to create a new person completed successfully with id {Person}",
-                    "SUCCEEDED", person.Code);
+                    "SUCCEEDED", person.PersonId);
 
                 return person;
             }
@@ -55,11 +55,11 @@ namespace ManagePeople.Domains.Entities.Persons.Repositories
             }
         }
 
-        public async Task<bool> DeleteAsync(int code)
+        public async Task<bool> DeleteAsync(int personId)
         {
             logger.LogInformation(
-    "Repository => Attempting to delete team {Team}",
-         code);
+    "Repository => Attempting to delete person {Person}",
+         personId);
 
             using var sqlConnection = new SqlConnection(connectionStrings.Value.ManagePeopleDb);
 
@@ -67,12 +67,12 @@ namespace ManagePeople.Domains.Entities.Persons.Repositories
             {
                 await sqlConnection.ExecuteAsync(
                     sql: storedProcedures.Value.DeletePersonById,
-                    param: new { Code=code },
+                    param: new { personId },
                     commandType: CommandType.StoredProcedure);
 
                 logger.LogInformation(
-                    "{Announcement}: Attempt to delete team {Team} completed successfully",
-                    "SUCCEEDED", code);
+                    "{Announcement}: Attempt to delete person {Person} completed successfully",
+                    "SUCCEEDED", personId);
 
                 return true;
             }
@@ -80,8 +80,8 @@ namespace ManagePeople.Domains.Entities.Persons.Repositories
             {
                 logger.LogError(
                     ex,
-                    "{Announcement}: Attempt to delete team {Team} was unsuccessful",
-                    "FAILED", code);
+                    "{Announcement}: Attempt to delete person {Person} was unsuccessful",
+                    "FAILED", personId);
 
                 return false;
             }
@@ -119,11 +119,11 @@ namespace ManagePeople.Domains.Entities.Persons.Repositories
             return persons;
         }
 
-        public async Task<PersonModel?> RetrieveSingleAsync(int code)
+        public async Task<PersonModel?> RetrieveSingleAsync(int personId)
         {
             logger.LogInformation(
             "Repository => Attempting to retrieve person {Person}",
-            code);
+            personId);
 
             using var sqlConnection = new SqlConnection(connectionStrings.Value.ManagePeopleDb);
 
@@ -134,19 +134,19 @@ namespace ManagePeople.Domains.Entities.Persons.Repositories
                 person =
                     await sqlConnection.QuerySingleOrDefaultAsync<PersonModel>(
                         sql: storedProcedures.Value.GetPersonById,
-                        param: new { code },
+                        param: new { personId },
                         commandType: CommandType.StoredProcedure);
 
                 logger.LogInformation(
                     "{Announcement}: Attempt to retrieve person {Person} completed successfully",
-                    "SUCCEEDED", code);
+                    "SUCCEEDED", personId);
             }
             catch (Exception ex)
             {
                 logger.LogError(
                     ex,
                     "{Announcement}: Attempt to retrieve person {Person} was unsuccessful",
-                    "FAILED", code);
+                    "FAILED", personId);
 
                 person = null;
             }
@@ -155,11 +155,11 @@ namespace ManagePeople.Domains.Entities.Persons.Repositories
         }
 
 
-        public async Task<bool> UpdateAsync(int code, PersonModel person)
+        public async Task<bool> UpdateAsync(int personId, PersonModel person)
         {
             logger.LogInformation(
-             "Repository => Attempting to update team {Team}",
-             code);
+             "Repository => Attempting to update person {Person}",
+             personId);
 
             using var sqlConnection = new SqlConnection(connectionStrings.Value.ManagePeopleDb);
 
@@ -169,16 +169,16 @@ namespace ManagePeople.Domains.Entities.Persons.Repositories
                     sql: storedProcedures.Value.UpdatePersonById,
                     param: new
                     {
-                        code,
+                        personId,
                         person.Name,
                         person.Surname,
-                        Id_Number = person.IdNumber
+                        person.IdNumber
                     },
                     commandType: CommandType.StoredProcedure);
 
                 logger.LogInformation(
                     "{Announcement}: Attempt to update person {Person} completed successfully",
-                    "SUCCEEDED", code);
+                    "SUCCEEDED", personId);
 
                 return true;
             }
@@ -187,7 +187,7 @@ namespace ManagePeople.Domains.Entities.Persons.Repositories
                 logger.LogError(
                     ex,
                     "{Announcement}: Attempt to update person {Person} was unsuccessful",
-                    "FAILED", code);
+                    "FAILED", personId);
 
                 return false;
             }

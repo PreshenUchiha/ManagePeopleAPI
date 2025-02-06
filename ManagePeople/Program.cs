@@ -1,5 +1,6 @@
 using ManagePeople;
 using ManagePeople.Configuration;
+using ManagePeople.Domains.Entities.Accounts;
 using ManagePeople.Domains.Entities.Accounts.Repositories;
 using ManagePeople.Domains.Entities.Persons;
 using ManagePeople.Domains.Entities.Persons.Repositories;
@@ -56,6 +57,7 @@ builder.Services.AddSwaggerGen(setup =>
 var ManagePeopleDbConnectionString = builder.Configuration.GetConnectionString("ManagePeopleDb")
                                     ?? throw new InvalidOperationException("ConnectionStrings:ManagePeopleDb is missing in configuration");
 builder.Services.AddPersonServices();
+builder.Services.AddAccountServices();
 
 builder.Services.AddScoped<Stopwatch>();
 

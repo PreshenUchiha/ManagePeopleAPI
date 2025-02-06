@@ -8,10 +8,10 @@ namespace ManagePeople.Domains.Entities.Persons.Repositories
 
         Task<List<PersonModel>> RetrieveAllAsync();
 
-        Task<PersonModel?> RetrieveSingleAsync(int code);
+        Task<PersonModel?> RetrieveSingleAsync(int personId);
 
-        Task<bool> UpdateAsync(int code, PersonModel person);
+        Task<bool> UpdateAsync(int personId, PersonModel person);
 
-        Task<bool> DeleteAsync(int code);
+        Task<bool> DeleteAsync(int personId);
     }
 }

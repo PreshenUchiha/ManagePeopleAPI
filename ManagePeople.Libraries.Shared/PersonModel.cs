@@ -4,7 +4,7 @@ namespace ManagePeople.Libraries.Shared
 {
     public class PersonModel
     {
-        public int Code { get; set; }
+        public int PersonId { get; set; }
 
         [Required]
         public string? Name { get; set; }
@@ -14,7 +14,5 @@ namespace ManagePeople.Libraries.Shared
 
         [Required]
         public string IdNumber { get; set; } = string.Empty;
-
-        public List<AccountModel>? Accounts { get; set; } = new();
     }
 }
