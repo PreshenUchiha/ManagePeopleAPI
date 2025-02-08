@@ -27,6 +27,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Accounts", "Accounts", "{A7
 		UpdateAccountById.sql = UpdateAccountById.sql
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transactions", "Transactions", "{62EC8903-D596-4B15-8F4C-D267095A4D60}"
+	ProjectSection(SolutionItems) = preProject
+		DeleteTransactionById.sql = DeleteTransactionById.sql
+		GetAllTransactionsByAccountId.sql = GetAllTransactionsByAccountId.sql
+		GetTransactionById.sql = GetTransactionById.sql
+		InsertNewTransaction.sql = InsertNewTransaction.sql
+		UpdateTransactionById.sql = UpdateTransactionById.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +57,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B2F0F11C-B718-4E99-85B8-0A50DCAE940D} = {B408FAF5-93B2-4FC5-9089-5A660356F6C9}
 		{A79A0FD9-2FDC-4CE9-9EB6-26535E1D6E65} = {B408FAF5-93B2-4FC5-9089-5A660356F6C9}
+		{62EC8903-D596-4B15-8F4C-D267095A4D60} = {B408FAF5-93B2-4FC5-9089-5A660356F6C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {983B9D57-DF95-4E5A-993D-7C27D02C013B}

@@ -4,7 +4,9 @@ using ManagePeople.Domains.Entities.Accounts;
 using ManagePeople.Domains.Entities.Accounts.Repositories;
 using ManagePeople.Domains.Entities.Persons;
 using ManagePeople.Domains.Entities.Persons.Repositories;
+using ManagePeople.Domains.Entities.Transactions;
 using ManagePeople.Domains.Entities.Transactions.Repositories;
+using ManagePeopleAPI.Domains.Entities.Transactions;
 using Microsoft.OpenApi.Models;
 using System.Diagnostics;
 
@@ -58,6 +60,7 @@ var ManagePeopleDbConnectionString = builder.Configuration.GetConnectionString("
                                     ?? throw new InvalidOperationException("ConnectionStrings:ManagePeopleDb is missing in configuration");
 builder.Services.AddPersonServices();
 builder.Services.AddAccountServices();
+builder.Services.AddTransactionServices();
 
 builder.Services.AddScoped<Stopwatch>();
 

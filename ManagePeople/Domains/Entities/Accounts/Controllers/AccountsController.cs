@@ -77,7 +77,7 @@ namespace ManagePeople.Domains.Entities.Accounts.Controllers
         }
 
         [HttpGet("{accountId:int}", Name = nameof(RetrieveSingleAccountAsync))]
-        [ProducesResponseType<PersonModel>(StatusCodes.Status200OK)]
+        [ProducesResponseType<AccountModel>(StatusCodes.Status200OK)]
         [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<PersonModel>> RetrieveSingleAccountAsync(int accountId)
         {
@@ -155,9 +155,9 @@ namespace ManagePeople.Domains.Entities.Accounts.Controllers
                 "Controller => Attempting to delete account {AccountId}",
                 accountId);
 
-            var person = await accountsRepository.RetrieveSingleAsync(accountId);
+            var account = await accountsRepository.RetrieveSingleAsync(accountId);
 
-            if (person is null)
+            if (account is null)
             {
                 logger.LogWarning(
                     "{Announcement}: The account [{Account}] that was requested for deletion was not found",

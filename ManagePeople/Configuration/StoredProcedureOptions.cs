@@ -15,7 +15,7 @@
         public string UpdateAccountById { get; set; } = string.Empty;
         public string DeleteAccountById { get; set; } = string.Empty;
 
-        public string GetAllTransactions { get; set; } = string.Empty;
+        public string GetAllTransactionsByAccountId { get; set; } = string.Empty;
         public string GetTransactionById { get; set; } = string.Empty;
         public string InsertNewTransaction { get; set; } = string.Empty;
         public string UpdateTransactionById { get; set; } = string.Empty;

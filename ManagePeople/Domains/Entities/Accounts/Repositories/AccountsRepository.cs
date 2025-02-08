@@ -5,6 +5,7 @@ using ManagePeople.Domains.Entities.Persons.Repositories;
 using ManagePeople.Libraries.Shared;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Options;
+using Microsoft.Identity.Client;
 using System;
 using System.Data;
 
@@ -133,6 +134,7 @@ namespace ManagePeople.Domains.Entities.Accounts.Repositories
             logger.LogInformation(
                 "Repository => Attempting to update account {Account} from person {Person}",
                 accountId, personId);
+            logger.LogInformation(storedProcedures.Value.UpdateAccountById);
 
             using var sqlConnection = new SqlConnection(connectionStrings.Value.ManagePeopleDb);
 
@@ -142,8 +144,8 @@ namespace ManagePeople.Domains.Entities.Accounts.Repositories
                     sql: storedProcedures.Value.UpdateAccountById,
                     param: new
                     {
-                        accountId,
-                        personId,
+                        AccountId = accountId,
+                        PersonId = personId,
                         account.AccountNumber,
                         account.OutstandingBalance
                     },
