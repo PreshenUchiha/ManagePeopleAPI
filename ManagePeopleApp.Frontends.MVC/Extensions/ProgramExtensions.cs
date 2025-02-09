@@ -32,22 +32,28 @@ public static class ProgramExtensions
         return services;
     }
 
-    public static IServiceCollection AddHttpClientServices(
-        this IServiceCollection services,
-        IConfiguration configuration)
-    {
-        string? baseAddress = configuration["HttpClientBase:StandbyConnectBaseAddress"];
-
-        if (baseAddress is not null)
+        public static IServiceCollection AddHttpClientServices(
+            this IServiceCollection services,
+            IConfiguration configuration)
         {
-            services.AddHttpClient<IHttpClientHelper, HttpClientHelper>(client =>
-            {
-                client.BaseAddress = new Uri(baseAddress);
-                client.DefaultRequestHeaders.Add("XApiKey", configuration["Key:XApiKey"]);
-            });
-        }
+            string? baseAddress = configuration["HttpClientBase:ManagePeopleBaseAddress"];
 
-        return services;
-    }
+            if (!string.IsNullOrEmpty(baseAddress))
+            {
+                services.AddHttpClient<IHttpClientHelper, HttpClientHelper>(client =>
+                {
+                    client.BaseAddress = new Uri(baseAddress);
+                    client.DefaultRequestHeaders.Add("XApiKey", configuration["Key:XApiKey"]);
+                });
+            }
+            else
+            {
+                throw new Exception("Base address for HttpClient is missing in configuration.");
+            }
+
+            return services;
+        }
+    
+
 }
 

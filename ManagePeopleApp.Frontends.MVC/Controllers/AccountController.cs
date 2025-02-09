@@ -1,4 +1,6 @@
-﻿using ManagePeopleApp.Frontends.MVC.Domains.Accounts.Interface;
+﻿using ManagePeople.Libraries.Shared;
+using ManagePeopleApp.Frontends.MVC.Domains.Accounts.Interface;
+using ManagePeopleApp.Frontends.MVC.Domains.Persons.Interface;
 using ManagePeopleApp.Frontends.MVC.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -7,10 +9,11 @@ namespace ManagePeopleApp.Frontends.MVC.Controllers
 {
     public class AccountController(
         IAccountClientService accountClientService,
+        IPersonClientService personClientService,
         ILogger<AccountController> logger) : Controller
     {
         // GET: AccountController
-        [HttpGet("~/Teams/{id:int}/Members")]
+        [HttpGet]
         public async Task<IActionResult> GetAccountsByPersonId(int id)
         {
             if (!ModelState.IsValid)
@@ -18,28 +21,20 @@ namespace ManagePeopleApp.Frontends.MVC.Controllers
                 return BadRequest();
             }
 
-            HttpContext.Session.SetString(Constants.SessionKey, id.ToString());
+           // HttpContext.Session.SetString(Constants.SessionKey, id.ToString());
 
             ViewBag.DisableButton = "";
             ViewBag.Redirect = false;
 
             
-            var team = await teamClientService.GetTeamByTeamIdAsync(id);
+            var person = await personClientService.GetPersonByPersonIdAsync(id);
 
-            if (User.IsInRole(Constants.TeamViewer) && !signedInUsername.Equals(team?.TeamLeadActiveDirectoryUsername, StringComparison.InvariantCultureIgnoreCase))
-            {
-                ViewBag.DisableButton = "disabled";
-                ViewBag.Redirect = true;
-
-                return View(new ExtendedTeamMemberModel { TeamId = id });
-            }
-
-            if (team is null)
+            if (person is null)
             {
                 return NotFound();
             }
 
-            return View(new ExtendedTeamMemberModel { TeamId = id });
+            return View(new AccountModel { PersonId = id });
         }
 
         // GET: AccountController/Details/5

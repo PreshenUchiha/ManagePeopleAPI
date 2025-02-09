@@ -54,24 +54,6 @@ namespace HttpClientLibrary.HttpClientService
             return httpResponse;
         }
 
-        public async Task<HttpResponseMessage> HttpRetrieveAccessTokenAsync(AccessTokenModel model)
-        {
-            List<KeyValuePair<string, string>> keyValues =
-            [
-                new KeyValuePair<string, string>("username", model.Username),
-                new KeyValuePair<string, string>("password", model.Password),
-                new KeyValuePair<string, string>("grant_type", model.GrantType)
-            ];
-
-            HttpRequestMessage request = new(HttpMethod.Post, model.RequestUrl)
-            {
-                Content = new FormUrlEncodedContent(keyValues)
-            };
-
-            var response = await _httpClient.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-
-            return response;
-        }
+       
     }
 }
