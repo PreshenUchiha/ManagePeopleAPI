@@ -24,16 +24,24 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.PersonId</td>
-                <td>@item.Name</td>
-                <td>@item.Surname</td>
-                <td>@item.IdNumber</td>
+                <td>@Html.DisplayFor(modelItem => item.PersonId)</td>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Surname)</td>
+                <td>@Html.DisplayFor(modelItem => item.IdNumber)</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.PersonId" class="btn btn-primary btn-sm">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@item.PersonId" class="btn btn-danger btn-sm">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.PersonId" class="btn btn-primary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.PersonId" class="btn btn-info">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.PersonId" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#personsTable').DataTable();
+        });
+    </script>
+}

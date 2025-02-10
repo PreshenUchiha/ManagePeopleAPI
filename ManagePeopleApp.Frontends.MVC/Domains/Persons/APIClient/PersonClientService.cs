@@ -16,7 +16,8 @@ namespace ManagePeopleApp.Frontends.MVC.Domains.Persons.APIClient
         {
             try
             {
-                var url = apiEndpoints.Value.CreatePersonsEndpoint;
+                //var url = apiEndpoints.Value.CreatePersonsEndpoint;
+                var url = "api/persons";
 
                 var response = await client.HttpPostAsync(url, person);
 

@@ -14,7 +14,7 @@ namespace ManagePeopleApp.Frontends.MVC.Controllers
     {
         // GET: AccountController
         [HttpGet]
-        public async Task<IActionResult> GetAccountsByPersonId(int id)
+        public async Task<IActionResult> Index(int id)
         {
             if (!ModelState.IsValid)
             {
